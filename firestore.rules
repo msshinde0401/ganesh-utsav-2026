@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Auxiliary helper check for authenticated admins
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Event Configuration: Public Read, Admin Write
+    match /eventConfig/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Flats: Public Read (to show available flats), Admin Write
+    match /flats/{flatId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Aarti Slots: Public Read, Admin Write
+    match /aartiSlots/{slotId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Bookings: Public Read (by bookingId query or search), Admin Write
+    match /bookings/{bookingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Flat Booking Locks: Admin Read/Write only
+    match /flatBookingLocks/{flatId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Audit Logs: Admin Read/Write only
+    match /auditLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
