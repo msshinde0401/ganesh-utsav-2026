@@ -1,15 +1,15 @@
 {
-  "name": "ganesh-utsav-server",
+  "name": "ganesh-utsav-backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "npm install && cd .. && npm install && vite build"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "firebase-admin": "^12.0.0"
+    "firebase-admin": "^12.2.0"
   }
 }
