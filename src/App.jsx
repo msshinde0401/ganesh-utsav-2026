@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-const API_BASE = import.meta.env.PROD 
-  ? 'https://elan-ganesh-utsav-2026.onrender.com/' 
-  : 'http://localhost:5000/api';
+const API_BASE = '/api';
 
 function App() {
   const [slots, setSlots] = useState([]);
